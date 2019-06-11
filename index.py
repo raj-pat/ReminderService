@@ -1,12 +1,13 @@
 import json
-import datetime
+import boto3
 
-
-def handler(event, context):
-    data = {
-        'output': 'Hello World',
-        'timestamp': datetime.datetime.utcnow().isoformat()
+def lambda_handler(event, context):
+    # TODO implement
+   dynamodb = boto3.resource('dynamodb')
+   table = dynamodb.Table('Table1')
+   print("Creation time" + str(table.creation_date_time))
+   return {
+       
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
     }
-    return {'statusCode': 200,
-            'body': json.dumps(data),
-            'headers': {'Content-Type': 'application/json'}}
